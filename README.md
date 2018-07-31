@@ -42,3 +42,40 @@ obj = null; // eligible for garbage collection provided no one else is pointing 
 System.gc(); // forcing garbage collection
 ```
 _System.gc() should not be used in production/final code_
+
+### Tricky
+
+```
+class A {
+  int x = 10;
+  void print() { ... hello ... }
+}
+
+class B extends A {
+  int x = 20;
+  void print() { ... Hi ... }
+}
+
+main() {
+
+  A a = new B()
+  sysout(a.x) // 10 prints. early binding i.e. at compile time for variable
+  a.print()  // Hi prints. late binding for function
+}
+```
+
+### Wrapper classes are also immutable in nature e.g. Integer/int
+
+_clone() performs shallow copy. It cannot be called without overriding.
+clone() is protected. It is only available to subclasses. 
+We can call it from inside xyz class. We cannot create object outside and call it._
+
+shallow copy: A shallow copy of an object copies the ‘main’ object, but doesn’t copy the inner objects. The ‘inner objects’ are shared between the original object and its copy. For example, in our Person object, we would create a second Person, but both objects would share the same Name and Address objects.
+
+deep copy: ? 
+
+Steps: 1. override clone, 2. handle CloneNotSupportedException, 3. add implements Cloneable to xyz class
+
+Cloning does not call constructor. Cloning copies data bit by bit and hence faster. Cloning is best when you don't know all the variables with varying scopes.
+### We can increase visibility/scope when overriding. E.g. We can make protected to public.
+

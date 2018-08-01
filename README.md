@@ -79,3 +79,19 @@ Steps: 1. override clone, 2. handle CloneNotSupportedException, 3. add implement
 Cloning does not call constructor. Cloning copies data bit by bit and hence faster. Cloning is best when you don't know all the variables with varying scopes.
 ### We can increase visibility/scope when overriding. E.g. We can make protected to public.
 
+## Interface
+
+It is like a restricted verison of class. Contains only signatures of methods. Interface is like skeleton. Interface is meant for creating contracts.
+
+You've to implement/override all the methods in interface. Interface's object is not created, it has reference to a class which has implements to the interface.
+
+Methods need to be public in interface. Everything is abstract by default so no abstract keyword needed.
+
+_From Java 8 on, non-abstract & static methods are allowed. Syntax:_
+```
+public default String info() {
+  return "Dev by Google";
+```
+In above, info() can be overrided. It is however not compulsory.
+
+

@@ -106,4 +106,68 @@ In above, info() can be overrided. It is however not compulsory.
 
 #### If two interfaces that are implemented in class have 2 methods with same name then we only need to define one body in class.
 
+## Exception Handling
+
+```
+public double withdraw(double amount) throws Exception {
+	if( amount > balance ) {
+		Exception e = new Exception("Insufficient Balance!");
+		throw e;
+	}
+	else {
+		balance -= amount;
+		return balance;
+	}
+}
+```
+_throws need to be mentioned in signature so that we can throw_
+
+```
+public static void main(String[] args) {
+	BankAccount bankAcc = new BankAccount(100, 5000);
+
+	try {
+		double balance = bankAcc.withdraw(6000);
+		System.out.println("Balance left: " + balance);
+	} catch(Exception e) {
+		System.out.println(e.getMessage());
+	}
+
+}
+```
+
+#### Throwable is parent class of Exception. Throwable has 2 types/childs: Exception and Error. 
+
+#### Exceptions are checked i.e. compiler checks if exception is handled or not (try catch provided), and errors are unchecked.
+
+#### Exceptions can be recovered from. Errors are something we cannot recover from.
+
+#### OutOfMemoryError e.g. are errors because there is no point in catching it. So errors are generally related to low level resources (ram, cpu, etc.)
+
+There are some exceptions that are not needed to be handled like error. The child class to exception called RuntimeException are unchecked in nature. E.g. NullPointerException, ArrayIndexOutOfBounds
+
+```
+public double withdraw(double amount) throws RuntimeException {
+	if( amount > balance ) {
+		RuntimeException e = new RuntimeException("Insufficient Balance!");
+		throw e;
+	}
+	else {
+		balance -= amount;
+		return balance;
+	}
+}
+
+public static void main(String[] args) {
+	BankAccount bankAcc = new BankAccount(100, 5000);
+
+//		try {
+		double balance = bankAcc.withdraw(6000);
+		System.out.println("Balance left: " + balance);
+//		} catch(BankAccountException e) {
+//			System.out.println(e);
+//		}
+
+}
+```
 

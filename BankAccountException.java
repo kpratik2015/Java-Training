@@ -1,30 +1,49 @@
 package com.pratik.training.basics;
 
-public class BankAccountException extends Exception {
+public class BankAccount {
 
-	public BankAccountException() {
+	private int accno;
+	private double balance;
+	
+	public BankAccount() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public BankAccount(int accno, double balance) {
+		super();
+		this.setAccno(accno);
+		this.balance = balance;
+	}
+	
+	public double withdraw(double amount) throws BankAccountException {
+		if( amount > balance ) {
+			BankAccountException e = new BankAccountException("Insufficient Balance!");
+			throw e;
+		}
+		else {
+			balance -= amount;
+			return balance;
+		}
+	}
+
+	public int getAccno() {
+		return accno;
+	}
+
+	public void setAccno(int accno) {
+		this.accno = accno;
+	}
+	
+	public static void main(String[] args) {
+		BankAccount bankAcc = new BankAccount(100, 5000);
 		
-	}
-
-	public BankAccountException(String message, Throwable cause, boolean enableSuppression,
-			boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
-		// TODO Auto-generated constructor stub
-	}
-
-	public BankAccountException(String message, Throwable cause) {
-		super(message, cause);
-		// TODO Auto-generated constructor stub
-	}
-
-	public BankAccountException(String message) {
-		super(message);
-		// TODO Auto-generated constructor stub
-	}
-
-	public BankAccountException(Throwable cause) {
-		super(cause);
-		// TODO Auto-generated constructor stub
+		try {
+			double balance = bankAcc.withdraw(6000);
+			System.out.println("Balance left: " + balance);
+		} catch(BankAccountException e) {
+			System.out.println(e);
+		}
+		
 	}
 	
 }

@@ -13,33 +13,25 @@ public class Toy implements Cloneable {
 		// TODO Auto-generated method stub
 		Toy clonedToy = (Toy) super.clone();
 		Battery[] newBattArr = new Battery[battarr.length];
-		if( battarr.length != 0) {
-			for(int i = 0; i < battarr.length; i++){
-				Battery battClone = (Battery) newBattArr[i].clone();
-				newBattArr[i] = battClone;
-			}
+		for(int i = 0; i < battarr.length; i++){
+			Battery battClone = (Battery) battarr[i].clone();
+			newBattArr[i] = battClone;
 		}
+		
 		clonedToy.setBattarr(newBattArr);
 		return clonedToy;
 	}
 	
 	
 	public Toy() {
-//		this.battarr = new Battery[5];
-//		for(int i = 0; i < 5; i++){
-//
-//			Battery b = new Battery(count++);
-//
-//			battarr[i] = b;
-//
-//		}
+
 	}
 	
 	public Toy(int numberOfBatteries) {
 		super();
-		this.battarr = new Battery[count];
+		this.battarr = new Battery[numberOfBatteries];
 
-		for(int i = 0; i < count; i++){
+		for(int i = 0; i < numberOfBatteries; i++){
 
 			Battery b = new Battery(count++);
 	
@@ -68,7 +60,7 @@ public class Toy implements Cloneable {
 			batList.add(battarr[i].getBatteryNumber());
 		}
 		
-		return "Toy [battarr=" + batList.toString() + "]";
+		return "Toy [battarr=" + batList + "]";
 	}
 
 

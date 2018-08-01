@@ -94,4 +94,16 @@ public default String info() {
 ```
 In above, info() can be overrided. It is however not compulsory.
 
+#### If you don't want to implement a method that has to be overriden due to interface, we do:
+```
+@Override
+	public void pause() {
+		throw new UnsupportedOperationException("Method not yet implemented");
+	}
+```
+
+#### Multiple inheritance is not supported by java. Even though you can say interface helps in it but not really. Why? Because in inheritance we get properties and characteristics of parent. However, in case of interface we aren't getting anything since it is just a skeleton. Rather we are getting more burden to put life into the methods of interface.
+
+#### If two interfaces that are implemented in class have 2 methods with same name then we only need to define one body in class.
+
 

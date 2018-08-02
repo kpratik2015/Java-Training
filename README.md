@@ -416,3 +416,15 @@ Anonymous class is always a subclass. It either implements an interface or exten
 Lambda style can only be used with interfaces having one method
 
 @FunctionalInterface for interface with only one method.
+
+## Threading
+
+Two ways to create java thread:
+- Extend the java.lang.Thread class
+- Implement the java.lang.Runnable interface
+
+When a Java Virtual Machine starts up, there is usually a single non-daemon thread (which typically calls the method named main of some designated class). 
+
+The name of thread created after java wakes up is Main. Basically every java program is a thread. JVM creates this non-daemon thread called Main.
+
+By default in java any thread we create is non-daemon. JVM will wait for any thread that is still running. 

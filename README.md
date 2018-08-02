@@ -171,3 +171,40 @@ public static void main(String[] args) {
 }
 ```
 
+### Tricky
+
+```
+class First {
+	First() {
+		def1
+	}
+	
+	First(int x) {
+		param1
+	}
+}
+
+class Second extends First {
+
+	Second() {
+		def2
+	}
+	
+	Second(int x) {
+		param2
+	}
+
+}
+
+
+main() {
+	Second s1 = new Second(); // def1 def2
+	Second s2 = new Second(10); // def1 param2
+}
+```
+
+To avoid above, we explicitly put super keyword with specific constructor to call in parent. Otherwise default constructor of parent will be called.
+
+#### Better to use List (interface) instead of ArrayList. This will promote loose coupling and we are talking through interface.
+
+#### String ... strings => array of string 

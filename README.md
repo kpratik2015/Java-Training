@@ -208,3 +208,211 @@ To avoid above, we explicitly put super keyword with specific constructor to cal
 #### Better to use List (interface) instead of ArrayList. This will promote loose coupling and we are talking through interface.
 
 #### String ... strings => array of string 
+
+
+### Overriding contains and equals
+
+```
+package com.pratik.training.basics;
+
+public class User {
+
+	private String username;
+	private String password;
+	
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public User(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		return true;
+	}
+	
+	
+	
+	
+}
+
+```
+
+```
+package com.pratik.training.basics;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class UserService {
+
+	private List<User> users;
+	
+	public UserService() {
+		users = new ArrayList<>();
+		users.add(new User("pratik","123"));
+		users.add(new User("josh","456"));
+		users.add(new User("rahul","789"));
+		users.add(new User("ritesh","1011"));
+		users.add(new User("karthik","1213"));
+	}
+	
+	public boolean isValidUser(String username, String password) {
+//		for( User us : users) {
+//			if	(
+//					us.getUsername().equals(username) 
+//					&& us.getPassword().equals(password)
+//				)
+//				return true;
+//		}
+//		return false;
+		/*
+		 * OVERRIDE HASHCODE AND EQUALS TO GET CORRECT OUTPUT FROM CONTAINS
+		 */
+		return users.contains(new User(username, password)); 
+	}
+	
+	public static void main(String[] args) {
+		UserService us = new UserService();
+		System.out.println(us.isValidUser("pratik", "123"));
+	}
+}
+
+```
+
+#### // TODO helps us identify lines of code which are to be implemented.
+
+## Innerclass and Lambda
+
+- It can be public. 
+- There is no as such benefit but it is used for logical purpose. However, we can better hide by making innerclass private.
+- Innerclass has access to private variables of class enclosing it.
+
+_ALLOWED (Class inside function): \[This is more popular\]
+```
+package com.pratik.training.innerclass;
+
+@FunctionalInterface
+interface Printer {
+	void print(String document);
+}
+
+
+class DotMatrixPrinter implements Printer {
+	@Override
+	public void print(String document) {
+		System.out.println("Code to print the " + document);
+	}
+}
+
+class WordApplication {
+
+	/*
+	 * This code is not highly re-usable. 
+	 * It is not worth writing in separate file and sharing with others.
+	 * Basically its usability is less.
+	 */
+	
+	class InbuiltPrinter implements Printer {
+		/*
+		 * Innerclass can be a public class.
+		 * Why this innerclass? Because logically WordApplication is not a printer.
+		 * That is, there is no IS-A relation with Printer for WordApplication.	
+		 */
+		@Override
+		public void print(String document) {
+			System.out.println("Code to print the " + document);
+		}
+	}
+
+	
+}
+
+
+public class InnerClassesAndLambda {
+	
+	public static void main(String[] args) {
+		
+		class InkjetPrinter implements Printer {
+			@Override
+			public void print(String document) {
+				System.out.println("Code to print the " + document);
+			}
+		}
+		InkjetPrinter ip = new InkjetPrinter();
+		ip.print("abc.txt");
+		
+		// Anonymous Inner Class
+		Printer p = new Printer() { // Writing a class that implements Printer interface
+			public void print(String document) {
+				System.out.println("Code to print the " + document);
+			}
+		};
+		p.print("xyz.txt");
+		
+		// Lamba Style - anonymous functions/methods
+		// Lambda style can only be used with interfaces having one method
+		Printer pr = (String document) -> {
+			System.out.println("Code to print the " + document);
+		};
+		// OR
+		// Printer pr = (String document) -> System.out.println("Code to print the " + document);
+		// OR
+		// Printer pr = d -> System.out.println("Code to print the " + d);
+		pr.print("ai.txt");
+	}
+	
+}
+```
+
+Anonymous class is always a subclass. It either implements an interface or extends a class.
+
+Lambda style can only be used with interfaces having one method
+
+@FunctionalInterface for interface with only one method.

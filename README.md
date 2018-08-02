@@ -428,3 +428,13 @@ When a Java Virtual Machine starts up, there is usually a single non-daemon thre
 The name of thread created after java wakes up is Main. Basically every java program is a thread. JVM creates this non-daemon thread called Main.
 
 By default in java any thread we create is non-daemon. JVM will wait for any thread that is still running. 
+
+##### if thread is set as daemon then the JVM doesn't wait for the thread to complete. And as JVM quits, thread also quit as they need JVM to run.
+
+Download: [Java Concurrency Animated](https://sourceforge.net/projects/javaconcurrenta/)
+
+Add synchronized keyword before function signature for common function that can be executed by multiple threads.
+
+Semaphore has permits. It can allow 'n' number of threads to execute a block of code. Mutex in java is achieved through synchornized keyword.
+
+Latch is like multiple locks with different keys on a block of code.

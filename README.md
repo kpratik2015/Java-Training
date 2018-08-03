@@ -438,3 +438,70 @@ Add synchronized keyword before function signature for common function that can 
 Semaphore has permits. It can allow 'n' number of threads to execute a block of code. Mutex in java is achieved through synchornized keyword.
 
 Latch is like multiple locks with different keys on a block of code.
+
+## Streams
+
+Reading and writing and networking are common areas for stream. 
+
+A stream is a path of information from a source to destination.
+
+There are 2 types of streams: Bytes stream and character stream.
+
+Byte stream has inputstream and outputstream
+
+Character stream has reader and writer
+
+Character encoding: 
+- ANSI/ASC II (only for english characters)
+- UTF-8 
+- UTF-16 (for chinese, japanse languages - simplified)
+- UTF-32
+
+#### /** to start for documentation
+
+Buffer size is 8 kb. Without BufferedInputStream, the FileInputStream has to go through many layers of OS, driver, etc. to get the reading done for file.
+
+Higher the size of buffer doesn't mean speedier the copy. The buffer is in JVM. Basically there is buffer in JVM and in RAM. The solution is nio library.
+
+_Note popular use of fetching line by line_
+```
+String line = "";
+			
+while(true) {
+	line = inBuffer.readLine();
+	if(line == null) break;
+	outBuffer.write(line);
+	outBuffer.newLine();
+}
+```
+
+_Note to remove duplicates we can use hashset._
+
+## Serialization
+
+Serialization provides a standard way to save and restore object graphs between sessions on the same or different systems.
+
+Serialization saves the following:
+- Object type
+- Internal information
+- Reference to other objects.
+
+E.g. open notepad, resize and move. Then close. Re-open and it will open up where it was closed with the same size. Here, the state is saved. OR games
+
+Making an object for Serialization: sample object has to implement Serializable.
+
+Classes to help us make serializable object: ObjectOutputStream, ObjectInputStream
+
+Serializable interface is markup interface. There are no functions.
+
+#### Externaizable can be used to customize how the object is written in file.
+
+_Activation and Passivation terms are used in session. Passivation means saving state into persistent medium_
+
+#### Marker Interface: Is used only for identification or toggling like a class is serializable only when 'implements' done. E.g. cloneable, serializable.
+
+_nio library -> non blocking i/o
+It will require only one buffer and it'll be shared between OS and JVM.
+allocateDirect() helps in above sharing (making it very fast).
+Channel in nio gives native handle to file which makes it fast.
+_

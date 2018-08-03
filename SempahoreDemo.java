@@ -54,41 +54,30 @@ class ConnectionPool {
 	Semaphore semaphore = new Semaphore(5);
 	Connection[] connection = new Connection[5];
 	static Map<Integer, Integer>busyFree;
+	static int limit = 4;
 	
 	public ConnectionPool() {
 		// TODO Auto-generated constructor stub
 		for(int i = 4 ; i >= 0 ; i--) {
 			connection[i] = new Connection();
 			busyFree = new HashMap<>();
-			busyFree.put(i, 0);
+			busyFree.put(connection[i].hashCode(), i);
+//			System.out.println(connection[i].hashCode() + " " + i);
 		}
 	}
 	
 	public Connection getConnection() {
+		
 		try {
 			semaphore.acquire();
 		} catch (InterruptedException e) { }
-		int index = 0;
-		for(int i : busyFree.keySet()) {
-			if(busyFree.get(i) == 0) {
-				index = i;
-				busyFree.put(index, 1);
-				break;
-			}
-				
-		}
-		return connection[index];
+		
+		return connection[limit--];
 	}
 	
 	public void closeConnection(Connection c) {
-		int index = 0;
-		for(int i : busyFree.keySet()) {
-			if(busyFree.get(i) == 1) {
-				busyFree.put(i, 0);
-				break;
-			}
-			
-		}
+		limit++;
+		busyFree.put(c.hashCode(), c.hashCode());
 		
 		semaphore.release();
 	}

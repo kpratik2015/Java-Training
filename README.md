@@ -503,7 +503,51 @@ _Activation and Passivation terms are used in session. Passivation means saving 
 _nio library -> non blocking i/o
 It will require only one buffer and it'll be shared between OS and JVM.
 allocateDirect() helps in above sharing (making it very fast).
-Channel in nio gives native handle to file which makes it fast.
-_
+Channel in nio gives native handle to file which makes it fast._
 
+# Best Practices (Clean Code)
 
+## What is clean code?
+
+Introduced by: Uncle Bob, Robert C Martin (Has 40+ videos on it.)
+
+Grady Booch, author of OOA and Design with Applications
+
+Use capital and underscore for final static variables.
+
+Method names: getName() { }
+
+Class names: class NameList { } 
+
+Shouldn't do: String phoneString;
+
+### Functions
+
+Ideally function code should be between 2-4 lines. A function should do one thing well.
+
+No. of arguements: less than 3 ideally. If 3 - justify and 3+ should be avoided.
+
+### Comments
+
+Innacurate comments are worse than no comments at all
+
+Must have them, but minimize them
+
+_BAD_
+
+```
+// check to see if emp has full benefits
+if( (cond1) && (cond2) )
+```
+
+_GOOD_
+
+```
+if( emp.isEligibleForFullBenefits() )
+```
+
+### Error Handling
+
+Use exceptions, not returning codes. E.g. if entry not added in database then throw exception.
+
+Don't return null. Throw exception.		

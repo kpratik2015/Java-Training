@@ -505,3 +505,5 @@ It will require only one buffer and it'll be shared between OS and JVM.
 allocateDirect() helps in above sharing (making it very fast).
 Channel in nio gives native handle to file which makes it fast.
 _
+
+

@@ -551,3 +551,67 @@ if( emp.isEligibleForFullBenefits() )
 Use exceptions, not returning codes. E.g. if entry not added in database then throw exception.
 
 Don't return null. Throw exception.		
+
+## Factory Pattern
+
+```
+package com.pratik.training.loggerv3;
+
+public class LoggerFactory {
+
+	/**
+	 * FACTORY DESIGN PATTERN
+	 * This allows for changing in only one place. It's like a config file.
+	 * So when we have to change from console logger to file logger then we have to change
+	 * only here.
+	 * @return
+	 */
+	
+	public Logger getLogger(String type) {
+		if(type.equals("console"))
+			return new ConsoleLogger();
+		else if(type.equals("file"))
+			return new FileLogger();
+		throw new UnsupportedOperationException("Invalid logger type: " + type);
+	}
+	
+}
+
+```
+
+## Singleton Pattern
+
+```
+Runtime r = Runtime.getRuntime();
+Runtime r2 = Runtime.getRuntime();
+
+r == r2 // true
+
+```
+
+Single object in memory and can be used multiple times. Also, TimeZone is an example.
+
+```
+public class LoggerFactory {
+
+	/**
+	 * SINGLETON PATTERN
+	 * @return
+	 */
+	
+	private static LoggerFactory myself;
+	
+	private LoggerFactory() {
+		
+	}
+	
+	public static LoggerFactory getInstance() {
+		if(myself == null)
+			myself = new LoggerFactory();
+		return myself;
+	}
+.
+.
+.
+```
+

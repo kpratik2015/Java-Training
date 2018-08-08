@@ -615,3 +615,34 @@ public class LoggerFactory {
 .
 ```
 
+## SOLID Principles
+
+S - Single Responsibility Principle
+O - Open/Close principle
+L - Liskov Substitution Principle
+I - Interface segregation
+D - Dependency Inverison
+
+Strive for low coupling and high cohesion
+
+Cohesion: how strongly-related and focused 
+
+Coupling: the degree to which each program module relies on each one of the other modules 
+
+O - software entities (classes, modules,etc.) should be open for extension, but closed for modificaiton. Basically use inheritance and polymorphism as much as possible.
+
+L - states that (analogy) if it looks like a duck, quacks like a duck, but needs batteries then you have probably wrong abstraction. BASICALLY talks about IS-A relationship
+
+_Substitutability_
+
+- Child classes must not:
+1) Remove base class behavior
+2) Violate base class invariants
+
+LSP suggests that IS-A should be replaced with IS-SUBSTITUTABLE-FOR. Makes code maintainable.
+
+I - states that clients should not be forced to depend on methods they do not use.
+
+D - E.g. Class A requires object of B to run something. But we create object of B somewhere else and supply to A.
+
+
